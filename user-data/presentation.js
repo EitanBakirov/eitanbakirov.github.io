@@ -115,3 +115,20 @@ export const projectPresentation = {
     ]
   }
 };
+
+export const educationOrganizations = {
+  "Tel Aviv University": {
+    "logo": "assets/organizations/tel-aviv-university.png",
+    "alt": "Tel Aviv University logo"
+  },
+  "Hakfar Hayarok College": {
+    "logo": "assets/organizations/hakfar-hayarok.png",
+    "alt": "Hakfar Hayarok College logo",
+    "wordmark": true
+  },
+  "Efrayim Katsir High School, Holon": {
+    "logo": "assets/organizations/ephraim-katzir.png",
+    "alt": "Ephraim Katzir High School logo",
+    "emblem": true
+  }
+};
