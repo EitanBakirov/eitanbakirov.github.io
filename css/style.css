@@ -1387,3 +1387,14 @@ nav { font-size: 14px; }
   .dialog-actions .button, .hero-actions .button { font-size: 14px; }
   footer { font-size: 12px; }
 }
+
+/* Official transparent logos: no plate behind the university mark. */
+.education-logo.theme-aware-logo,
+:root[data-theme="dark"] .education-logo.theme-aware-logo {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+.education-logo .logo-dark { display: none; }
+:root[data-theme="dark"] .education-logo .logo-light { display: none; }
+:root[data-theme="dark"] .education-logo .logo-dark { display: block; }

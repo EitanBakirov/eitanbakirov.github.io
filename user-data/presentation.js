@@ -118,7 +118,8 @@ export const projectPresentation = {
 
 export const educationOrganizations = {
   "Tel Aviv University": {
-    "logo": "assets/organizations/tel-aviv-university.png",
+    "logo": "assets/organizations/tel-aviv-university-transparent.png",
+    "darkLogo": "assets/organizations/tel-aviv-university-white.png",
     "alt": "Tel Aviv University logo"
   },
   "Hakfar Hayarok College": {

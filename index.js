@@ -173,7 +173,16 @@ education.forEach(item => {
     image.loading = 'lazy';
     image.width = organization.emblem ? 100 : 140;
     image.height = 100;
-    logo.append(image);
+    if (organization.darkLogo) {
+      logo.classList.add('theme-aware-logo');
+      image.className = 'logo-light';
+      const darkImage = image.cloneNode();
+      darkImage.src = organization.darkLogo;
+      darkImage.className = 'logo-dark';
+      logo.append(image, darkImage);
+    } else {
+      logo.append(image);
+    }
     meta.append(logo);
   }
   row.append(meta, body);
