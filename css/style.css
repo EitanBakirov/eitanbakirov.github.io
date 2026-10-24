@@ -1294,7 +1294,8 @@ body:has(dialog[open]) {
 @media (max-width: 760px) { .education-logo.wordmark { width: 125px; height: 65px; } }
 @media (max-width: 520px) { .education-logo.wordmark { width: 160px; height: 65px; } }
 
-/* The prepared square portrait fits the circular frame directly. */
+/* Original-photo crop: 700 × 700 window starting at (680, 800) in the
+   1576 × 2100 source. The original pixels and colors remain unchanged. */
 .portrait-crop {
   position: relative;
   width: 100%;
@@ -1303,10 +1304,12 @@ body:has(dialog[open]) {
   border-radius: 50%;
 }
 .portrait-crop img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: absolute;
+  width: 225.142857%;
+  max-width: none;
+  height: auto;
+  left: -97.142857%;
+  top: -114.285714%;
 }
 .hero-aside { padding-top: 0; }
 .social-links {
