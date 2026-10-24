@@ -16,10 +16,9 @@ export const socialLinks = [
 
 
 export const bio = [
-  "Hello, I'm Eitan Bakirov!",
-  "A <strong>Data Scientist</strong> passionate about transforming complex data into actionable insights and solving real-world problems.",
-  "I focus on machine learning, deep learning, and data analysis, with hands-on experience in developing AI-powered solutions and data-driven applications.",
-  "Currently exploring new challenges in AI and data science, while continuously expanding my technical expertise."
+  "I'm Eitan Bakirov, a <strong>Data Scientist at Argmax</strong> building prediction models, semantic search, and personalized recommendation systems.",
+  "My work spans data preparation, model development, evaluation, and production integration. I focus on reliable evaluation, reproducible experiments, and consistent behavior between training and inference.",
+  "Previously, I worked on code-similarity detection and model benchmarking as an AI Engineer Intern at Checkmarx."
 ];
 
 export const skills = [
@@ -35,6 +34,11 @@ export const skills = [
       "Recommendation Systems",
       "Deep Learning",
       "Model Evaluation",
+      "XGBoost",
+      "Feature Engineering",
+      "Probability Calibration",
+      "Bayesian Estimation",
+      "Multi-Armed Bandits",
     ],
   },
   {
@@ -48,6 +52,7 @@ export const skills = [
       "Data Preprocessing",
       "Exploratory Data Analysis",
       "Statistical Analysis",
+      "PySpark",
     ],
   },
   {
@@ -58,6 +63,9 @@ export const skills = [
       "RAG",
       "LLMs",
       "Text Processing",
+      "Semantic Search",
+      "Text and Image Embeddings",
+      "Hybrid Retrieval",
     ],
   },
   {
@@ -75,6 +83,9 @@ export const skills = [
       "Multi-processing",
       "Logging",
       "Monitoring",
+      "MLflow",
+      "Prefect",
+      "pytest",
     ],
   },
   {
@@ -83,12 +94,40 @@ export const skills = [
       "AWS",
       "Azure",
       "Vector Databases (Qdrant)",
+      "Databricks",
+      "OpenSearch",
+      "PostgreSQL (querying)",
     ],
   },
 ];
 
 
 export const experience = [
+  {
+    title: "Argmax",
+    duration: "July 2025 - Present",
+    subtitle: "Data Scientist",
+    details: [
+      "Develop prediction models for advertising applications using logistic regression and XGBoost, with feature engineering, probability calibration, and model evaluation.",
+      "Build data processing and modeling pipelines with Python, SQL, PySpark, and Databricks; use MLflow to track experiments and package models for production inference.",
+      "Build semantic search and personalized recommendations with FastAPI and OpenSearch, using text and image embeddings, hybrid retrieval, and behavioral signals.",
+      "Implement adaptive-selection bandits using Bayesian estimation and exploration-exploitation methods to address cold starts, sparse data, and delayed feedback.",
+      "Work with data science, engineering, and product teams to integrate models, APIs, and data workflows into production systems.",
+    ],
+    tags: [
+      "Python",
+      "SQL",
+      "PySpark",
+      "Databricks",
+      "XGBoost",
+      "MLflow",
+      "FastAPI",
+      "OpenSearch",
+      "Recommendation Systems",
+      "Multi-Armed Bandits"
+    ],
+    icon: "briefcase",
+  },
   {
     title: "Checkmarx",
     duration: "2024",
