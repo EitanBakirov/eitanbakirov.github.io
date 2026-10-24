@@ -376,40 +376,9 @@ h1>span,.contact-section h2>span {
   margin:auto
 }
 
-.portrait-frame:before {
-  content:"";
-  position:absolute;
-  inset:-15px;
-  border:1px dashed var(--line);
-  border-radius:50%;
-  z-index:-1
-}
 
-.portrait-frame img {
-  width:100%;
-  height:auto;
-  aspect-ratio:1;
-  object-fit:cover;
-  border-radius:50%
-}
 
-.hero-caption {
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin:32px auto 0;
-  max-width:270px;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.55
-}
 
-.caption-line {
-  width:36px;
-  height:2px;
-  background:var(--accent);
-  flex:none
-}
 
 .section {
   padding-block:78px
@@ -964,17 +933,6 @@ body:has(dialog[open]) {
   .portrait-frame {
     padding:7px
   }
-  .portrait-frame:before {
-    inset:-8px
-  }
-  .hero-caption {
-    font-size:10px;
-    gap:8px;
-    margin-top:22px
-  }
-  .caption-line {
-    width:20px
-  }
   .hero .eyebrow {
     font-size:9px
   }
@@ -1322,3 +1280,110 @@ body:has(dialog[open]) {
 .education-logo.wordmark { width: 170px; height: 75px; }
 @media (max-width: 760px) { .education-logo.wordmark { width: 125px; height: 65px; } }
 @media (max-width: 520px) { .education-logo.wordmark { width: 160px; height: 65px; } }
+
+/* Original-photo crop: 700 × 700 window starting at (680, 800) in the
+   1576 × 2100 source. The original pixels and colors remain unchanged. */
+.portrait-crop {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.portrait-crop img {
+  position: absolute;
+  width: 225.142857%;
+  max-width: none;
+  height: auto;
+  left: -97.142857%;
+  top: -114.285714%;
+}
+.hero-aside { padding-top: 0; }
+.social-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  margin: 32px auto 0;
+}
+.social-links a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 11px;
+  min-height: 64px;
+  padding: 13px 12px;
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition: transform .18s, border-color .18s;
+}
+.social-links a:hover { transform: translateY(-2px); border-color: var(--accent); }
+.social-links .social-icon { width: 29px; height: 29px; }
+.button .social-icon { width: 23px; height: 23px; }
+
+/* Center each organization mark within its column, horizontally and vertically. */
+.experience-meta, .education-meta {
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.experience-meta .period, .education-meta .period { text-align: center; }
+
+/* A modest, consistent increase for reading text, controls and metadata. */
+body { font-size: 17px; line-height: 1.75; }
+nav { font-size: 14px; }
+.intro { font-size: 17px; line-height: 1.8; }
+.section-heading > p { font-size: 16px; }
+.organization { font-size: 16px; }
+.detail-list { font-size: 15px; line-height: 1.8; }
+.education-item .detail-list { font-size: 14px; }
+.project-card p { font-size: 15px; line-height: 1.7; }
+.dialog-description { font-size: 16px; }
+.period { font-size: 13px; }
+.button { font-size: 15px; }
+.tag-list span, .project-bottom .tag-list span { font-size: 12px; }
+.skill-card .tag-list span { font-size: 13px; }
+.skill-card h3 { font-size: 16px; }
+.filters button, .project-count { font-size: 13px; }
+.project-category { font-size: 11px; }
+.contact-section p:not(.eyebrow) { font-size: 15px; }
+.gallery figcaption, footer { font-size: 13px; }
+.current-label { font-size: 11px; }
+
+@media (max-width: 1000px) {
+  .social-links { grid-template-columns: 1fr; max-width: 240px; gap: 10px; }
+}
+@media (max-width: 760px) {
+  nav { font-size: 12px; }
+  .intro { font-size: 16px; }
+  .section-heading > p { font-size: 14px; }
+  .organization { font-size: 14px; }
+  .detail-list, .education-item .detail-list { font-size: 14px; }
+  .skill-card h3 { font-size: 15px; }
+  .skill-card .tag-list span { font-size: 12px; }
+  .button { font-size: 14px; }
+  .social-links a { font-size: 14px; padding-inline: 8px; gap: 8px; }
+  .social-links .social-icon { width: 26px; height: 26px; }
+}
+@media (max-width: 520px) {
+  .hero-aside { display: flex; flex-direction: column; align-items: center; align-self: stretch; width: 100%; padding: 0; }
+  .portrait-frame { width: min(260px, 75vw); }
+  .social-links { grid-template-columns: repeat(2, minmax(0,1fr)); max-width: 340px; margin-top: 24px; }
+  .social-links a { font-size: 16px; }
+  .social-links .social-icon { width: 29px; height: 29px; }
+  .experience-meta, .education-meta { flex-direction: column; align-items: center; justify-content: center; gap: 14px; margin-bottom: 26px; }
+  .experience-meta .period, .education-meta .period { text-align: center; max-width: none; margin: 0; }
+  .education-meta .education-logo { order: -1; }
+  .project-card p { font-size: 14px; }
+  .dialog-description { font-size: 15px; }
+  .project-category { font-size: 10px; }
+  .filters button, .project-count { font-size: 12px; }
+  .dialog-actions .button, .hero-actions .button { font-size: 14px; }
+  footer { font-size: 12px; }
+}
