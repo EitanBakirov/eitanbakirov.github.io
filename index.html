@@ -1,248 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- SEO meta tags -->
-  <title>Eitan Bakirov | Portfolio</title>
-  <meta name="description" content="Portfolio webpage of Eitan Bakirov - Data Scientist and Machine Learning Engineer" />
-  <meta name="keywords" content="portfolio, data science, machine learning, AI, deep learning, Python, SQL, developer, github, projects" />
-  <meta name="author" content="Eitan Bakirov" />
-  
-  <!-- Open Graph meta tags for social media -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Eitan Bakirov Portfolio" />
-  <meta property="og:title" content="Eitan Bakirov | Portfolio" />
-  <meta property="og:description" content="Portfolio webpage of Eitan Bakirov - Data Scientist and Machine Learning Engineer" />
-  <meta property="og:image" content="https://eitanbakirov.github.io/logo.png" />
-  <meta property="og:url" content="https://eitanbakirov.github.io/" />
-  
-  <!-- Twitter Card meta tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Eitan Bakirov | Portfolio" />
-  <meta name="twitter:description" content="Portfolio webpage of Eitan Bakirov - Data Scientist and Machine Learning Engineer" />
-  <meta name="twitter:image" content="https://eitanbakirov.github.io/logo.png" />
-  
-  <!-- Favicon and Apple Touch Icons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="./logo.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="./logo.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./logo.png" />
-  
-  <!-- Theme Color for mobile browsers -->
-  <meta name="theme-color" content="#ffffff" />
-  
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://eitanbakirov.github.io/" />
-  
-  <!-- External stylesheets -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Raleway&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/animate.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-
-  <!-- JavaScript files -->
-  <script src="js/modernizr-2.6.2.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eitan Bakirov | Data Scientist</title>
+  <meta name="description" content="Eitan Bakirov, Data Scientist at Argmax. Prediction models, semantic search, personalized recommendations, and production integration.">
+  <meta name="author" content="Eitan Bakirov">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Eitan Bakirov | Data Scientist">
+  <meta property="og:description" content="Prediction models, semantic search, and personalized recommendations. Explore my experience and projects.">
+  <meta property="og:image" content="https://eitanbakirov.github.io/logo.png">
+  <meta property="og:url" content="https://eitanbakirov.github.io/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f7f9fc">
+  <link rel="canonical" href="https://eitanbakirov.github.io/">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    try { if (localStorage.getItem('eitan-theme') === 'dark' || (!localStorage.getItem('eitan-theme') && localStorage.getItem('darkMode') === 'enabled')) document.documentElement.dataset.theme = 'dark'; } catch {}
+  </script>
   <script type="module" src="index.js"></script>
-  <script src="js/profile-card.js"></script>
 </head>
-
 <body>
-  <div id="colorlib-page">
-    <div class="container-wrap">
-
-      <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-
-      <aside id="colorlib-aside" role="complementary" class="border js-fullheight no-print">
-        <button id="darkModeToggle"></button>
-        <div class="text-center">
-          <div class="author-img">
-            <img alt="profile-img" src="./logo.png" style="width: 200px; height: 200px;"/>
-          </div>
-          <h1 id="colorlib-logo"><a href="./index.html">Eitan Bakirov</a></h1>
-          <!-- Add social links -->
-          <div class="social-links" style="margin: 10px 0;" id="social-links-container">
-            <!-- Links will be populated by JavaScript -->
-          </div>
-        </div>
-        
-        <nav id="colorlib-main-menu" role="navigation" class="navbar" style="padding-top: 2em">
-          <div id="navbar" class="collapse">
-            <ul>
-              <li><a href="#" data-nav-section="about">About</a></li>
-              <li><a href="#" data-nav-section="skills">Skills</a></li>
-              <li><a href="#" data-nav-section="projects">My Projects</a></li>
-              <!--<li><a href="#" data-nav-section="repos">Latest Repos</a></li>-->
-              <!--<li><a href="#" data-nav-section="blogs">Blogs</a></li>-->
-              <li><a href="#" data-nav-section="experience">Work Experience</a></li>
-              <li><a href="#" data-nav-section="education">Education</a></li>
-              <li><a href="#" data-nav-section="contact">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
-      </aside>
-
-      <div id="colorlib-main">
-
-        <!-- About Section -->
-        <section class="colorlib-about" data-section="about">
-          <div class="colorlib-narrow-content">
-            <div class="row animate-box" data-animate-effect="fadeInLeft">
-              <div class="about-desc">
-                <h1>About</h1>
-                <div id="bio"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section class="colorlib-skills" data-section="skills">
-          <div class="colorlib-narrow-content">
-            <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-              <div class="about-desc">
-                <h1>Skills</h1>
-              </div>
-            </div>
-            <div id="skills" class="row">
-                <!-- Skills will be dynamically inserted here -->
-            </div>
-          </div>
-        </section>
-
-        
-        <!-- My Projects Section -->
-        <section class="colorlib-projects" data-section="projects">
-          <div class="colorlib-narrow-content">
-            <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-              <div class="about-desc">
-                <h1>My <span style="color: #2c98f0">Projects</span></h1>
-              </div>
-            </div>
-            <div id="projects-container" class="row">
-              <!-- Projects will be dynamically inserted here -->
-            </div>
-          </div>
-        </section>
-
-        <!-- Project Modal -->
-        <div id="projectModal" class="project-modal">
-          <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 id="modal-title">Project title</h2>
-            <div id="modal-carousel" class="carousel">
-              <!-- Images will be inserted here -->
-            </div>
-            <p id="modal-description"></p>
-            <div id="modal-tags" class="modal-tags"></div>
-            <div class="modal-buttons">
-              <a id="modal-github" href="#" target="_blank" class="btn-demo">View Code</a>
-              <a id="modal-demo" href="#" target="_blank" class="btn-demo">Live Demo</a>
-            </div>
-          </div>
-        </div>
-        
-        
-        <!-- GitHub Repos Section -->
-         <!--
-        <section class="colorlib-experience no-print" data-section="repos">
-          <div class="colorlib-narrow-content">
-            <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-              <div class="about-desc">
-                <a href="https://github.com/EitanBakirov" target="_blank" style="color: inherit">
-                  <h1>Latest <span style="color: #2c98f0">Repos</span> <i class="fa fa-external-link" aria-hidden="true" style="font-size: 30px"></i></h1>
-                </a>
-              </div>
-            </div>
-            <ul id="accordion" class="accordion animate-box" data-animate-effect="fadeInLeft">
-              <li class="open">
-                <ul id="repos" style="display: block; padding: 10px"></ul>
-              </li>
-            </ul>
-          </div>
-        </section>
-        -->
-
-
-        <!-- Blogs Section -->
-        <!--
-        <section class="colorlib-blogs no-print" data-section="blogs">
-          <div class="colorlib-narrow-content">
-            <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-              <div class="about-desc">
-                <a href="https://medium.com/@eitanbakirov" target="_blank" style="color: inherit">
-                  <h1>Latest <span style="color: #2c98f0">Blogs</span> <i class="fa fa-external-link" aria-hidden="true" style="font-size: 30px"></i></h1>
-                </a>
-              </div>
-            </div>
-            <ul id="accordion" class="accordion animate-box" data-animate-effect="fadeInLeft">
-              <li class="open">
-                <ul id="blogs" class="submenu" style="display: flex; padding: 10px; flex-direction: column; gap: 10px;"></ul>
-              </li>
-            </ul>
-          </div>
-        </section>
-        -->
-
-        <!-- Work Experience Section -->
-        <section class="colorlib-experience" data-section="experience">
-          <div class="colorlib-narrow-content">
-            <div class="row row-bottom-padded-sm animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-              <div class="about-desc">
-                <h1>Work <span style="color: #2c98f0">Experience</span></h1>
-              </div>
-            </div>
-            <div class="timeline-centered" id="experience"></div>
-          </div>
-        </section>
-
-        <!-- Education Section -->
-        <section class="colorlib-education" data-section="education">
-          <div class="colorlib-narrow-content">
-            <div class="row row-bottom-padded-sm animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
-              <div class="about-desc">
-                <h1>Education</h1>
-              </div>
-            </div>
-            <div class="timeline-centered" id="education"></div>
-          </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="colorlib-contact" data-section="contact">
-          <div class="colorlib-narrow-content">
-            <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-              <div class="about-desc">
-                <h1>Contact</h1>
-                <p>Feel free to connect with me via <a href="https://www.linkedin.com/in/eitan-bakirov/" target="_blank">LinkedIn</a> or visit my <a href="https://github.com/EitanBakirov" target="_blank">GitHub</a>.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Footer -->
-        <section class="colorlib-footer no-print" data-section="footer">
-          <div class="colorlib-narrow-content">
-            <footer class="footer" id="footer">
-              <!--<p>Based on <a href="https://vinaysomawat.github.io/">Vinay Somawat</a> Portfolio</p> -->
-              <p>Designed and developed using GitHub Pages</p>
-            </footer>
-          </div>
-        </section>
-
-      </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Eitan Bakirov home"><span class="brand-mark" aria-hidden="true">eb<span>.</span></span><span>Eitan Bakirov</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 13.2A8.7 8.7 0 0 1 10.8 3a8.8 8.8 0 1 0 10 10.2Z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg></button>
     </div>
-  </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/main.js"></script>
-
-  <script type="module" src="user-data/data.js"></script>
-  <script type="module" src="user-data/urls.js"></script>
-  
+  </header>
+  <main id="main">
+    <section class="hero page-width" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Data Scientist <span aria-hidden="true">/</span> Argmax</p>
+        <h1 id="hero-title">Eitan Bakirov<span>.</span></h1>
+        <p class="hero-specialties">Prediction. Search.<br> Recommendations.</p>
+        <div class="intro" id="bio"></div>
+        <div class="hero-actions"><a class="button button-primary" href="#experience">View experience <span aria-hidden="true">↘</span></a><a class="button button-secondary" href="#projects">Explore projects <span aria-hidden="true">↓</span></a></div>
+        <div class="social-links" id="social-links-container" aria-label="Social profiles"></div>
+      </div>
+      <div class="hero-aside">
+        <div class="portrait-frame"><img src="logo.png" width="784" height="792" alt="Eitan Bakirov" fetchpriority="high"></div>
+        <div class="hero-caption"><span class="caption-line" aria-hidden="true"></span><p>From model development<br>to production integration.</p></div>
+      </div>
+    </section>
+    <section class="experience-section section" id="experience" aria-labelledby="experience-title">
+      <div class="page-width">
+        <div class="section-heading"><div><p class="eyebrow">01 / Professional background</p><h2 id="experience-title">Experience</h2></div><p>Modeling, retrieval, and the engineering<br class="desktop-break"> that connects them to real systems.</p></div>
+        <div class="experience-list" id="experience-list"></div>
+      </div>
+    </section>
+    <section class="section page-width" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading"><div><p class="eyebrow">02 / Technical toolkit</p><h2 id="skills-title">Skills &amp; methods</h2></div><p>The tools behind my modeling,<br class="desktop-break"> search, and application work.</p></div>
+      <div class="skills-grid" id="skills-grid"></div>
+    </section>
+    <section class="section projects-section" id="projects" aria-labelledby="projects-title">
+      <div class="page-width">
+        <div class="section-heading"><div><p class="eyebrow">03 / Project portfolio</p><h2 id="projects-title">Selected projects</h2></div><p>Internship, academic, and prototype work.<br class="desktop-break"> Open a project for details and screenshots.</p></div>
+        <div class="project-toolbar"><div class="filters" role="group" aria-label="Filter projects"><button type="button" data-filter="all" aria-pressed="true">All projects</button><button type="button" data-filter="ai" aria-pressed="false">Applied AI</button><button type="button" data-filter="ml" aria-pressed="false">Machine learning</button><button type="button" data-filter="analysis" aria-pressed="false">Analysis</button><button type="button" data-filter="software" aria-pressed="false">Software</button></div><span class="project-count" id="project-count" role="status" aria-live="polite"></span></div>
+        <div class="project-grid" id="projects-container"></div>
+      </div>
+    </section>
+    <section class="section page-width" id="education" aria-labelledby="education-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / Foundations</p><h2 id="education-title">Education</h2></div><p>Data science, economics,<br class="desktop-break"> and software engineering.</p></div>
+      <div class="education-list" id="education-list"></div>
+    </section>
+    <section class="contact-section page-width" id="contact" aria-labelledby="contact-title"><div><p class="eyebrow">05 / Connect</p><h2 id="contact-title">Let's connect<span>.</span></h2><p>Find me on LinkedIn or explore my work on GitHub.</p></div><div class="contact-links"><a class="button button-primary" href="https://www.linkedin.com/in/eitan-bakirov/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="https://github.com/EitanBakirov" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer class="page-width"><span>© <span id="year"></span> Eitan Bakirov</span><div><a href="assets/credits.html">Asset credits</a><a href="#top">Back to top ↑</a></div></footer>
+  <dialog class="project-dialog" id="project-modal" aria-labelledby="modal-title"><div class="dialog-content"><button class="dialog-close" type="button" aria-label="Close project details">×</button><p class="eyebrow" id="modal-category"></p><h2 id="modal-title"></h2><p class="dialog-description" id="modal-description"></p><div class="tag-list" id="modal-tags"></div><div class="dialog-actions"><a class="button button-primary" id="modal-github" target="_blank" rel="noopener noreferrer">View code ↗</a><a class="button button-secondary" id="modal-demo" target="_blank" rel="noopener noreferrer" hidden>Live demo ↗</a></div><div class="gallery" id="modal-gallery"></div></div></dialog>
+  <noscript><p class="noscript-note">Enable JavaScript to view the experience, skills, and project details. You can also visit <a href="https://github.com/EitanBakirov">my GitHub profile</a>.</p></noscript>
 </body>
 </html>

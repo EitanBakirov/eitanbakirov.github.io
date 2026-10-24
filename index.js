@@ -1,325 +1,192 @@
-import {
-  bio,
-  skills,
-  education,
-  experience,
-  featuredProjects, // Import the featured projects
-  socialLinks, // Import social links
-} from "./user-data/data.js";
-import { fetchRepoScreenshots } from './js/github-api.js';
-import { getTagColor } from './user-data/tag-colors.js'; // Add import at the top
+import { bio, skills, experience, education, featuredProjects, socialLinks } from './user-data/data.js';
+import { organizations, projectPresentation } from './user-data/presentation.js';
 
-function populateBio(items, id) {
-  const bioTag = document.getElementById(id);
-  items.forEach((bioItem) => {
-    const p = document.createElement("p");
-    p.innerHTML = bioItem;
-    bioTag.append(p);
+const select = selector => document.querySelector(selector);
+const element = (tag, className, text) => {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+const externalLink = (url, className, text) => {
+  const link = element('a', className, text);
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  return link;
+};
+const coreTools = new Set(['Python', 'SQL', 'PySpark', 'Databricks', 'MLflow', 'XGBoost', 'OpenSearch', 'FastAPI', 'Probability Calibration', 'Multi-Armed Bandits', 'Semantic Search']);
+const tags = (items, emphasize = false) => {
+  const list = element('div', 'tag-list');
+  items.forEach(item => list.append(element('span', emphasize && coreTools.has(item) ? 'key-tool' : '', item)));
+  return list;
+};
+const details = (items, emphasize = false) => {
+  const list = element('ul', 'detail-list');
+  items.forEach(text => {
+    const item = element('li');
+    if (!emphasize) item.textContent = text;
+    else text.split(/(logistic regression|XGBoost|probability calibration|Python, SQL, PySpark, and Databricks|MLflow|FastAPI and OpenSearch|Bayesian estimation)/g).forEach((part, i) => item.append(i % 2 ? element('strong', '', part) : document.createTextNode(part)));
+    list.append(item);
   });
-}
+  return list;
+};
 
-function populateExpEdu(items, id) {
-  const container = document.getElementById(id);
-
-  items.forEach((item) => {
-    const article = document.createElement("article");
-    article.className = "timeline-entry animate-box";
-
-    const inner = document.createElement("div");
-    inner.className = "timeline-entry-inner";
-
-    const icon = document.createElement("div");
-    icon.className = "timeline-icon color-2";
-    const i = document.createElement("i");
-    i.className = `fa fa-${item.icon}`;
-    icon.append(i);
-
-    const label = document.createElement("div");
-    label.className = "timeline-label";
-
-    const title = document.createElement("h2");
-    title.innerHTML = `${item.title} <span>${item.duration}</span>`;
-    label.append(title);
-
-    const subtitle = document.createElement("span");
-    subtitle.className = "timeline-sublabel";
-    subtitle.innerHTML = item.subtitle;
-    label.append(subtitle);
-
-    item.details.forEach((detail) => {
-      const p = document.createElement("p");
-      p.className = "timeline-text";
-      p.innerHTML = `&blacksquare; ${detail}`;
-      label.append(p);
-    });
-
-    const tagsDiv = document.createElement("div");
-    item.tags.forEach((tag) => {
-      const span = document.createElement("span");
-      span.className = "badge";
-      span.innerHTML = tag;
-      span.style.backgroundColor = getTagColor(tag);
-      span.style.color = "#ffffff";  // White text for better contrast
-      tagsDiv.append(span);
-    });
-    label.append(tagsDiv);
-
-    inner.append(icon);
-    inner.append(label);
-    article.append(inner);
-    container.append(article);
-  });
-
-  // Add final circle
-  const endArticle = document.createElement("article");
-  endArticle.className = "timeline-entry begin animate-box";
-  const endInner = document.createElement("div");
-  endInner.className = "timeline-entry-inner";
-  const endIcon = document.createElement("div");
-  endIcon.className = "timeline-icon color-none";
-  endInner.append(endIcon);
-  endArticle.append(endInner);
-  container.append(endArticle);
-}
-
-function populateSkills() {
-    const skillsContainer = document.getElementById('skills');
-    
-    skills.forEach(category => {
-        // Create a row for each category
-        const rowDiv = document.createElement('div');
-        rowDiv.className = 'row animate-box';
-        rowDiv.setAttribute('data-animate-effect', 'fadeInLeft');
-        
-        // Create the skill div
-        const skillDiv = document.createElement('div');
-        skillDiv.className = 'col-md-12';
-        
-        // Create paragraph element
-        const p = document.createElement('p');
-        p.innerHTML = `<b>${category.category}:</b> ${category.items.join(', ')}`;
-        
-        skillDiv.appendChild(p);
-        rowDiv.appendChild(skillDiv);
-        skillsContainer.appendChild(rowDiv);
-    });
-}
-
-async function populateRepos() {
-    const reposContainer = document.getElementById('repos');
-    try {
-        // Use the GitHub API directly instead of the third-party service
-        const response = await fetch(`https://api.github.com/users/EitanBakirov/repos?sort=updated&direction=desc&per_page=6`);
-        const repos = await response.json();
-        
-        repos.forEach(repo => {
-            const li = document.createElement('li');
-            li.className = 'animate-box';
-            li.innerHTML = `
-                <div class="repo-card">
-                    <h3 class="repo-heading">${repo.name}</h3>
-                    <p class="repo-description">${repo.description || 'No description available'}</p>
-                    <p class="repo-language">Main language: ${repo.language || 'Not specified'}</p>
-                    <p class="repo-stars">⭐ ${repo.stargazers_count} stars</p>
-                    <a href="${repo.html_url}" target="_blank" class="repo-link">View Repository</a>
-                </div>
-            `;
-            reposContainer.appendChild(li);
-        });
-    } catch (error) {
-        console.error("Error fetching repositories:", error);
-        reposContainer.innerHTML = `<p>Failed to load repositories. Please check my <a href="https://github.com/EitanBakirov" target="_blank">GitHub profile</a> directly.</p>`;
-    }
-}
-
-
-
-async function populateProjects() {
-    const projectsContainer = document.getElementById('projects-container');
-    
-    for (const project of featuredProjects) {
-        try {
-            // Fetch screenshots
-            const screenshots = await fetchRepoScreenshots(project.repoName);
-            const thumbnail = screenshots.length > 0 ? screenshots[0].url : './images/default-project-thumb.png';
-            
-            // Create project card with new layout
-            const projectCard = document.createElement('div');
-            projectCard.className = 'col-md-4 animate-box';
-            projectCard.setAttribute('data-animate-effect', 'fadeInLeft');
-            
-            // Store data for modal
-            const projectData = {
-                ...project,
-                images: screenshots.map(s => s.url),
-                thumbnail: thumbnail
-            };
-            
-            // Get short description (first sentence)
-            const shortDesc = project.shortDescription;
-            
-            projectCard.innerHTML = `
-                <div class="project-card" data-project="${encodeURIComponent(JSON.stringify(projectData))}">
-                    <div class="project-card-content">
-                        <div class="project-image">
-                            <img src="${thumbnail}" alt="${project.title}">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">${project.title}</h3>
-                            <p class="project-description large-text">${shortDesc}</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            projectsContainer.appendChild(projectCard);
-        } catch (error) {
-            console.error(`Error creating project card for ${project.title}:`, error);
-        }
-    }
-    
-    addProjectCardListeners();
-}
-
-function addProjectCardListeners() {
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach(card => {
-        card.addEventListener('click', function() {
-            const encoded = this.getAttribute('data-project');
-            const projectData = JSON.parse(decodeURIComponent(encoded));
-            openProjectModal(projectData);
-        });
-    });
-}
-
-// Function to open the project modal
-function openProjectModal(project) {
-  // Set modal content
-  document.getElementById('modal-title').textContent = project.title;
-  document.getElementById('modal-description').textContent = project.description;
-  
-  // Set tags
-  const tagsContainer = document.getElementById('modal-tags');
-  tagsContainer.innerHTML = '';
-  project.tags.forEach(tag => {
-    const tagSpan = document.createElement('span');
-    tagSpan.className = 'modal-tag';
-    tagSpan.textContent = tag;
-    tagSpan.style.backgroundColor = getTagColor(tag);
-    tagSpan.style.color = "#ffffff";  // White text for better contrast
-    tagsContainer.appendChild(tagSpan);
-  });
-  
-  // Set buttons
-  const githubLink = document.getElementById('modal-github');
-  githubLink.href = project.github;
-  githubLink.className = 'modal-button btn-github';
-
-  const demoLink = document.getElementById('modal-demo');
-  if (project.demo) {
-    demoLink.href = project.demo;
-    demoLink.className = 'modal-button btn-demo';
-    demoLink.style.display = 'inline-block';
-  } else {
-    demoLink.style.display = 'none';
-  }
-  
-  // Create carousel
-  const carousel = document.getElementById('modal-carousel');
-  carousel.innerHTML = '';
-
-  // Filter out the thumbnail/first image from carousel images
-  const carouselImages = project.images.slice(1); // Skip the first image
-
-  if (carouselImages.length > 0) {
-    carouselImages.forEach((img, index) => {
-      const imgElement = document.createElement('img');
-      imgElement.src = img;
-      imgElement.alt = `${project.title} screenshot ${index + 1}`;
-      imgElement.className = index === 0 ? 'active' : '';
-      carousel.appendChild(imgElement);
-    });
-    
-    // Create carousel navigation dots if multiple images
-    if (carouselImages.length > 1) {
-      const dotsContainer = document.createElement('div');
-      dotsContainer.className = 'carousel-dots';
-      for (let i = 0; i < carouselImages.length; i++) {
-        const dot = document.createElement('span');
-        dot.className = i === 0 ? 'dot active' : 'dot';
-        dot.setAttribute('data-index', i);
-        dot.addEventListener('click', function() {
-          const index = parseInt(this.getAttribute('data-index'));
-          showSlide(index);
-        });
-        dotsContainer.appendChild(dot);
-      }
-      carousel.appendChild(dotsContainer);
-    }
-  } else {
-    // If no additional images, hide carousel
-    carousel.style.display = 'none';
-  }
-  
-  // Show modal
-  document.getElementById('projectModal').style.display = 'block';
-}
-
-// Function to handle modal carousel slides
-function showSlide(index) {
-  const slides = document.querySelectorAll('#modal-carousel img');
-  const dots = document.querySelectorAll('#modal-carousel .dot');
-  
-  slides.forEach((slide, i) => {
-    slide.className = i === index ? 'active' : '';
-  });
-  
-  dots.forEach((dot, i) => {
-    dot.className = i === index ? 'dot active' : 'dot';
-  });
-}
-
-function populateSocialLinks() {
-  const container = document.getElementById('social-links-container');
-  
-  socialLinks.forEach(link => {
-    const a = document.createElement('a');
-    a.href = link.url;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    
-    const i = document.createElement('i');
-    i.className = link.icon;
-    i.style.fontSize = "24px";
-    i.style.margin = "0 10px";
-    i.style.color = link.color;
-    
-    a.appendChild(i);
-    container.appendChild(a);
-  });
-}
-
-// Run all population functions
-populateBio(bio, "bio");
-populateExpEdu(experience, "experience");
-populateExpEdu(education, "education");
-
-// Call the function when the document is ready
-document.addEventListener('DOMContentLoaded', () => {
-  populateSkills();
-  populateRepos();
-  populateProjects(); // Add this line
-  populateSocialLinks(); // Add this line
-  
-  // Close modal when clicking the X
-  document.querySelector('.close-modal').addEventListener('click', function() {
-    document.getElementById('projectModal').style.display = 'none';
-  });
-  
-  // Close modal when clicking outside of it
-  window.addEventListener('click', function(event) {
-    if (event.target === document.getElementById('projectModal')) {
-      document.getElementById('projectModal').style.display = 'none';
-    }
-  });
+bio.forEach(text => {
+  const paragraph = element('p');
+  paragraph.innerHTML = text; // Trusted, repository-owned biography markup.
+  select('#bio').append(paragraph);
 });
+socialLinks.forEach(item => {
+  const link = externalLink(item.url, '', item.platform + ' ↗');
+  link.setAttribute('aria-label', `Eitan Bakirov on ${item.platform} (opens in a new tab)`);
+  select('#social-links-container').append(link);
+});
+
+experience.forEach((job, index) => {
+  const card = element('article', `experience-card${index === 0 ? ' current' : ''}`);
+  const meta = element('div', 'experience-meta');
+  meta.append(element('p', 'period', job.duration));
+  const organization = organizations[job.title];
+  if (organization) {
+    const logo = element('div', 'company-logo' + (organization.emblem ? ' emblem' : ''));
+    const image = element('img');
+    image.src = organization.logo;
+    image.alt = organization.alt;
+    image.loading = 'lazy';
+    image.width = 145;
+    image.height = 70;
+    logo.append(image);
+    meta.append(logo);
+  }
+  const body = element('div', 'experience-body');
+  const heading = element('div', 'role-header');
+  heading.append(element('h3', '', job.subtitle));
+  if (index === 0) heading.append(element('span', 'current-label', 'Current role'));
+  body.append(heading, element('p', 'organization', job.title), details(job.details, index === 0), tags(job.tags, true));
+  card.append(meta, body);
+  select('#experience-list').append(card);
+});
+
+skills.forEach((group, index) => {
+  const card = element('article', 'skill-card');
+  const title = element('h3');
+  title.append(element('span', 'skill-number', String(index + 1).padStart(2, '0')), document.createTextNode(group.category));
+  card.append(title, tags(group.items, true));
+  select('#skills-grid').append(card);
+});
+
+const modal = select('#project-modal');
+let lastProjectTrigger;
+const openProject = (project, trigger) => {
+  lastProjectTrigger = trigger;
+  const presentation = projectPresentation[project.repoName];
+  select('#modal-title').textContent = project.title;
+  select('#modal-category').textContent = presentation.label;
+  select('#modal-description').textContent = project.description;
+  select('#modal-tags').replaceChildren(...tags(project.tags).children);
+  select('#modal-github').href = project.github;
+  select('#modal-demo').hidden = !project.demo;
+  if (project.demo) select('#modal-demo').href = project.demo;
+  const gallery = select('#modal-gallery');
+  gallery.replaceChildren();
+  presentation.screenshots.forEach((path, index) => {
+    const figure = element('figure');
+    const image = element('img');
+    image.src = path;
+    image.alt = `${project.title} — screenshot ${index + 1}`;
+    image.loading = 'lazy';
+    figure.append(image, element('figcaption', '', `Screenshot ${index + 1}`));
+    gallery.append(figure);
+  });
+  modal.showModal();
+  modal.scrollTop = 0;
+};
+select('.dialog-close').addEventListener('click', () => modal.close());
+modal.addEventListener('click', event => {
+  const box = modal.getBoundingClientRect();
+  if (event.target === modal && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) modal.close();
+});
+modal.addEventListener('close', () => lastProjectTrigger?.focus());
+
+const renderProjects = (filter = 'all') => {
+  const visible = featuredProjects.filter(project => filter === 'all' || projectPresentation[project.repoName].category === filter);
+  select('#projects-container').replaceChildren();
+  visible.forEach(project => {
+    const presentation = projectPresentation[project.repoName];
+    const card = element('article', 'project-card');
+    const imageButton = element('button', 'project-image');
+    imageButton.type = 'button';
+    imageButton.setAttribute('aria-label', `View ${project.title} details`);
+    const image = element('img');
+    image.src = presentation.thumbnail;
+    image.alt = ''; // The adjacent title names the project.
+    image.loading = 'lazy';
+    image.width = 128;
+    image.height = 128;
+    imageButton.append(image);
+    imageButton.addEventListener('click', () => openProject(project, imageButton));
+    const copy = element('div', 'project-copy');
+    const heading = element('h3');
+    const titleButton = element('button', 'project-title', project.title);
+    titleButton.type = 'button';
+    titleButton.addEventListener('click', () => openProject(project, titleButton));
+    heading.append(titleButton);
+    const bottom = element('div', 'project-bottom');
+    const codeLink = externalLink(project.github, 'project-link', '↗');
+    codeLink.setAttribute('aria-label', `View ${project.title} code (opens in a new tab)`);
+    bottom.append(tags(project.tags.slice(0, 3)), codeLink);
+    copy.append(element('span', 'project-category', presentation.label), heading, element('p', '', project.shortDescription), bottom);
+    card.append(imageButton, copy);
+    select('#projects-container').append(card);
+  });
+  select('#project-count').textContent = `${visible.length} project${visible.length === 1 ? '' : 's'}`;
+};
+document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('[data-filter]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  renderProjects(button.dataset.filter);
+}));
+renderProjects();
+
+education.forEach(item => {
+  const row = element('article', 'education-item');
+  const body = element('div');
+  body.append(element('h3', '', item.title), element('p', 'organization', item.subtitle), details(item.details), tags(item.tags));
+  row.append(element('p', 'period', item.duration), body);
+  select('#education-list').append(row);
+});
+select('#year').textContent = new Date().getFullYear();
+
+const themeButton = select('.theme-toggle');
+const updateThemeLabel = () => {
+  const dark = document.documentElement.dataset.theme === 'dark';
+  themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
+  themeButton.setAttribute('aria-pressed', String(dark));
+};
+updateThemeLabel();
+themeButton.addEventListener('click', () => {
+  const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = theme;
+  try { localStorage.setItem('eitan-theme', theme); } catch {}
+  updateThemeLabel();
+});
+
+const navLinks = [...document.querySelectorAll('nav a')];
+const sections = navLinks.map(link => document.querySelector(link.getAttribute('href')));
+let scheduled = false;
+const updateNavigation = () => {
+  const readingLine = window.scrollY + 160;
+  let current;
+  sections.forEach(section => { if (section.offsetTop <= readingLine) current = section.id; });
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5) current = 'contact';
+  navLinks.forEach(link => {
+    if (link.hash === '#' + current) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+  scheduled = false;
+};
+window.addEventListener('scroll', () => {
+  if (!scheduled) { scheduled = true; requestAnimationFrame(updateNavigation); }
+}, {passive: true});
+window.addEventListener('resize', updateNavigation);
+updateNavigation();
