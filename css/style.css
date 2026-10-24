@@ -370,7 +370,7 @@ h1>span,.contact-section h2>span {
   background:var(--wash);
   border:1px solid var(--line);
   border-radius:50%;
-  padding:14px;
+  padding:5px;
   position:relative;
   max-width:320px;
   margin:auto
@@ -931,7 +931,7 @@ body:has(dialog[open]) {
     padding-top:60px
   }
   .portrait-frame {
-    padding:7px
+    padding:4px
   }
   .hero .eyebrow {
     font-size:9px
