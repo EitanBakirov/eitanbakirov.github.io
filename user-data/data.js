@@ -16,9 +16,9 @@ export const socialLinks = [
 
 
 export const bio = [
-  "I'm Eitan Bakirov, a <strong>Data Scientist at Argmax</strong> building prediction models, semantic search, and personalized recommendation systems.",
-  "My work spans data preparation, model development, evaluation, and production integration. I focus on reliable evaluation, reproducible experiments, and consistent behavior between training and inference.",
-  "Previously, I worked on code-similarity detection and model benchmarking as an AI Engineer Intern at Checkmarx."
+  "I'm Eitan Bakirov, a <strong>Data Scientist</strong> building machine learning systems, LLM-powered applications, and search &amp; recommendation services.",
+  "My work spans data processing, model development, evaluation, APIs, and web application integration. I focus on reproducible experiments and reliable behavior between development and production.",
+  "At <strong>Argmax</strong>, I work on prediction, search, and recommendations. Previously, at <strong>Checkmarx</strong>, I developed LLM-based code-similarity and model benchmarking tools."
 ];
 
 export const skills = [
