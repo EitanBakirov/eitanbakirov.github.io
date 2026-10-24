@@ -1,4 +1,4 @@
-import { bio, skills, experience, education, featuredProjects, socialLinks } from './user-data/data.js';
+import { bio, skills, skillAreas, experience, education, featuredProjects, socialLinks } from './user-data/data.js';
 import { organizations, educationOrganizations, projectPresentation } from './user-data/presentation.js';
 
 const select = selector => document.querySelector(selector);
@@ -52,6 +52,7 @@ socialLinks.forEach(item => {
 
 experience.forEach((job, index) => {
   const card = element('article', `experience-card${index === 0 ? ' current' : ''}`);
+  card.id = `experience-${job.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '')}`;
   const meta = element('div', 'experience-meta');
   meta.append(element('p', 'period', job.duration));
   const organization = organizations[job.title];
@@ -75,12 +76,18 @@ experience.forEach((job, index) => {
   select('#experience-list').append(card);
 });
 
-skills.forEach((group, index) => {
-  const card = element('article', 'skill-card');
-  const title = element('h3');
-  title.append(element('span', 'skill-number', String(index + 1).padStart(2, '0')), document.createTextNode(group.category));
-  card.append(title, tags(group.items, true));
-  select('#skills-grid').append(card);
+skillAreas.forEach(area => {
+  const item = element('article', 'capability');
+  const link = element('a', 'capability-link', area.linkText);
+  link.href = area.link;
+  item.append(element('h3', '', area.title), element('p', '', area.description), link);
+  select('#skills-grid').append(item);
+});
+
+skills.forEach(group => {
+  const item = element('div', 'toolkit-group');
+  item.append(element('h3', '', group.category), element('p', '', group.items.join(' · ')));
+  select('#skills-inventory').append(item);
 });
 
 const modal = select('#project-modal');

@@ -16,9 +16,34 @@ export const socialLinks = [
 
 
 export const bio = [
-  "I'm Eitan Bakirov, a <strong>Data Scientist</strong> building machine learning systems, LLM-powered applications, and search &amp; recommendation services.",
-  "My work spans data processing, model development, evaluation, APIs, and web application integration. I focus on reproducible experiments and reliable behavior between development and production.",
-  "At <strong>Argmax</strong>, I work on prediction, search, and recommendations. Previously, at <strong>Checkmarx</strong>, I developed LLM-based code-similarity and model benchmarking tools."
+  "At <strong>Argmax</strong>, I work on recommendations, search, and ML models, from embeddings and evaluation to production systems. Previously, at <strong>Checkmarx</strong>, I developed LLM-based code-similarity and model benchmarking tools."
+];
+
+export const skillAreas = [
+  {
+    title: "Prediction and evaluation",
+    description: "Advertising prediction models at Argmax, using logistic regression and XGBoost, feature engineering, and probability calibration.",
+    link: "#experience-argmax",
+    linkText: "Prediction work at Argmax",
+  },
+  {
+    title: "Search and recommendations",
+    description: "Semantic search and personalized recommendations at Argmax, combining text and image embeddings, hybrid retrieval, and behavioral signals.",
+    link: "#experience-argmax",
+    linkText: "Search work at Argmax",
+  },
+  {
+    title: "LLM applications",
+    description: "Code-similarity tools at Checkmarx, using LLM embeddings and Qdrant, with synthetic datasets and tailored metrics for benchmarking.",
+    link: "#experience-checkmarx",
+    linkText: "LLM work at Checkmarx",
+  },
+  {
+    title: "Application engineering",
+    description: "FastAPI services and Vue.js interfaces for the Checkmarx code-similarity application, alongside Docker packaging and integration work.",
+    link: "#experience-checkmarx",
+    linkText: "Application work at Checkmarx",
+  },
 ];
 
 export const skills = [
